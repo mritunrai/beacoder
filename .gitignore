@@ -1,2 +1,5 @@
 .gradle/
-.idea/
+.idea/*
+build/
+.idea/gradle.xml
+.idea/leetcode/editor.xml
