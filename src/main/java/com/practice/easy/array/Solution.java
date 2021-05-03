@@ -61,13 +61,11 @@ public class Solution {
      */
     public static int removeElementFromArray(int[] nums, int val) {
 
-        int i=0;
+        int i = 0;
 
-        for(int j=0;j< nums.length;j++)
-        {
-            if(nums[j]!=val)
-            {
-                nums[i]=nums[j];
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] != val) {
+                nums[i] = nums[j];
                 i++;
             }
         }
@@ -85,19 +83,70 @@ public class Solution {
     Output: 6
     Explanation: [4,-1,2,1] has the largest sum = 6.
      */
-    public static int maximumSubArray(int[] nums){
+    public static int maximumSubArray(int[] nums) {
 
+        int maxSubarray = Integer.MIN_VALUE;
+        int l = 0, m = 0;
+        for (int i = 0; i <= nums.length-1; i++) {
+            int avg = 0;
+
+            for (int j = i ; j < nums.length; j++) {
+                avg +=  nums[j];
+
+               // maxSubarray = Math.max(maxSubarray, avg);
+
+                if (avg > maxSubarray) {
+                    maxSubarray = avg;
+                    l = i;
+                    m = j;
+                }
+            }
+        }
+
+        System.out.println("Largest sequence sum :" + maxSubarray);
+        System.out.println("from index " + l + "to:" + m);
+
+        return maxSubarray;
+
+    }
+
+    public static int maximumSubArrayOptimize(int[] nums) {
+
+        int max_ending_here = 0;
+        int max_so_far = Integer.MIN_VALUE;
+
+        for(int i=0 ; i<nums.length;i++)
+        {
+            max_ending_here = max_ending_here +nums[i];
+
+            if(max_so_far < max_ending_here)
+            {
+                max_so_far = max_ending_here;
+            }
+
+            if(max_ending_here < 0)
+            {
+                max_ending_here = 0;
+            }
+        }
+        return max_so_far;
     }
 
     public static void main(String[] args) {
 
         int[] nums = new int[]{1, 1, 2, 1, 3, 3};
 
+        int[] subArray = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
+
         // System.out.println("Array length after removing duplicate elements :"
         //   + removeDuplicates(nums));
 
-       // System.out.println("Array length after removing duplicate elements" + removeDuplicatesUsingPointers(nums));
+        // System.out.println("Array length after removing duplicate elements" + removeDuplicatesUsingPointers(nums));
 
-        System.out.println("Removing element :"+ removeElementFromArray(nums,1));
+        //System.out.println("Removing element :"+ removeElementFromArray(nums,1));
+
+      //  System.out.println("Maximum sub array :" + maximumSubArray(subArray));
+
+        System.out.println("Maximum sub array :" + maximumSubArrayOptimize(subArray));
     }
 }
