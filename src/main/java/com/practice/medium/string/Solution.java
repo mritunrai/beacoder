@@ -4,6 +4,7 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class Solution {
 
@@ -175,9 +176,27 @@ https://www.programcreek.com/2013/02/leetcode-longest-substring-without-repeatin
     ABC ACB BAC BCA CBA CAB
     https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/?ref=leftbar-rightbar
      */
-    public void stringPermutation(String str) {
+    public static void stringPermutation(String str, int l, int r) {
+        if (l == r)
+            System.out.println(str);
 
+        else {
+            for (int i = l; i <= r; i++) {
+                str = swap(str, l, i);   // do
+                stringPermutation(str, l + 1, r);   // recur
+                str = swap(str, l, i);  // undo
+            }
+        }
 
+    }
+
+    private static String swap(String str, int l, int i) {
+        char temp;
+        char[] charArray = str.toCharArray();
+        temp = charArray[l];
+        charArray[l] = charArray[i];
+        charArray[i] = temp;
+        return String.valueOf(charArray);
     }
 
     /*
@@ -201,14 +220,17 @@ https://www.programcreek.com/2013/02/leetcode-longest-substring-without-repeatin
     }
 
     public static String validIPAddressUsingRegex(String IP) {
+        String chunkIPv4 = "([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])";
+        Pattern pattenIPv4 =
+                Pattern.compile("^(" + chunkIPv4 + "\\.){3}" + chunkIPv4 + "$");
 
-        try {
-            return (InetAddress.getByName(IP) instanceof Inet6Address) ? "IPv6" : "IPv4";
+        String chunkIPv6 = "([0-9a-fA-F]{1,4})";
+        Pattern pattenIPv6 =
+                Pattern.compile("^(" + chunkIPv6 + "\\:){7}" + chunkIPv6 + "$");
 
-        } catch (Exception e) {
-            return "Neither";
-        }
 
+        if (pattenIPv4.matcher(IP).matches()) return "IPv4";
+        return (pattenIPv6.matcher(IP).matches()) ? "IPv6" : "Neither";
 
     }
 
@@ -226,6 +248,16 @@ https://www.programcreek.com/2013/02/leetcode-longest-substring-without-repeatin
         //  System.out.println("Checking length between 0 -2 for mkrai :"+"mkrai".substring(0,3));
 
         // Calling IPAddress validation test cases.
-        System.out.println(validIPAddress("192.123.145.01.98"));
+        // System.out.println(validIPAddress("192.123.145.01.98"));
+
+        // Using Regex
+
+        //System.out.println(validIPAddressUsingRegex("123.345.23.23"));
+
+        // String Permutation.
+
+        String str = "ABC";
+        int n = str.length();
+        stringPermutation(str, 0, n - 1);
     }
 }
