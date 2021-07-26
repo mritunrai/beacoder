@@ -1,5 +1,7 @@
 .gradle/
 .idea/*
+.idea/gradle.xml
+.idea/compiler.xml
 build/
 .idea/gradle.xml
 .idea/leetcode/editor.xml
