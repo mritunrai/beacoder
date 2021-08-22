@@ -62,6 +62,11 @@ public class GraphCreation {
         list.add(createNodeList(nodeValue));
     }
 
+    public void creatingGraphUsingHashMap()
+    {
+
+    }
+
     private Node createNodeList(Set<String> node) {
         Node header = null;
         Node current = null;

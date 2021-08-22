@@ -1,2 +1,4 @@
 rootProject.name = 'BeACoder'
+include 'systemdesign'
+include 'javaconcepts'
 
