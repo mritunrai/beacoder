@@ -1,0 +1,31 @@
+package com.design.librarymanagementsystem.actors;
+
+import com.design.librarymanagementsystem.enumconstants.BookFormat;
+import com.design.librarymanagementsystem.enumconstants.BookStatus;
+
+import java.util.Date;
+
+public class BookItem  extends Book{
+    private String barcode;
+    private boolean isReferenceOnly;
+    private Date borrowed;
+    private Date dueDate;
+    private double price;
+    private BookFormat format;
+    private BookStatus status;
+    private Date dateOfPurchase;
+    private Date publicationDate;
+    private Rack placedAt;
+
+    public boolean checkout(String memberId) {
+//        if(bookItem.getIsReferenceOnly()) {
+//            ShowError("This book is Reference only and can't be issued");
+//            return false;
+//        }
+//        if(!BookLending.lendBook(this.getBarCode(), memberId)){
+//            return false;
+//        }
+//        this.updateBookItemStatus(BookStatus.LOANED);
+        return true;
+    }
+}
